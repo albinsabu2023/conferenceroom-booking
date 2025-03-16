@@ -158,6 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
         roomDiv.innerHTML = `
+          
           <h3>${room.name}</h3>
           <p><strong>Location:</strong> ${room.location}</p>
           <p><strong>Capacity:</strong> ${room.capacity}</p>
@@ -165,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ", "
           )}</p>
           <p><strong>Status:</strong> ${room.status}</p>
-          <button class="edit-btn" data-index="${index}">Edit</button>
+          
           ${
             room.status === "Active"
               ? `<button class="book-btn" data-index="${index}">Book Now</button>`

@@ -312,6 +312,26 @@
   z-index: 1000;
   width: 300px;
 }
+.book-btn{
+    display: inline-block;
+   border: 2px solid #c09ef9;
+    color: rgb(15, 15, 15);
+    padding: 5px 20px;
+   
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #bfa0f1;
+    }
+
+    &:active {
+        background-color: #4e1e9e;
+    }
+}
 
 .booking-modal input,
 .booking-modal select {
