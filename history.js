@@ -136,10 +136,9 @@ document.addEventListener("DOMContentLoaded", function () {
     loadBookings();
   }
 
-  closeModal.addEventListener(
-    "click",
-    () => (editModal.style.display = "hidden")
-  );
+  closeModal.addEventListener("click", function () {
+    editModal.style.display = "hidden";
+  });
 
   loadBookings();
 });

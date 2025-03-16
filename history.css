@@ -250,13 +250,14 @@
     padding: 10px 15px;
     border: none;
     cursor: pointer;
-    background: #007bff;
-    color: white;
+    opacity: .2;;
+    color: black;
     border-radius: 5px;
 }
 
 .tab-btn.active {
-    background: #0056b3;
+    opacity: .9;
+   border-bottom: 3px solid rgb(170, 67, 255);
 }
 
 .tab-content {
@@ -301,7 +302,13 @@ button {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
+.modal-content{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 300px;
+    
+}
 .modal.hidden {
     display: none;
 }
