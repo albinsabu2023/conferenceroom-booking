@@ -1,0 +1,123 @@
+{
+    "rooms": [
+        {
+            "name": "TR1",
+            "location": "TCS Kochi",
+            "capacity": 10,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC",
+                "Mike",
+                "Projector"
+            ],
+            "status": "Active"
+        },
+        {
+            "name": "TR2",
+            "location": "TCS Mumbai",
+            "capacity": 8,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC",
+                "Mike"
+            ],
+            "status": "Under Maintenance"
+        },
+        {
+            "name": "ODC",
+            "location": "TCS TVM",
+            "capacity": 20,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC"
+            ],
+            "status": "Active"
+        },
+        {
+            "name": "ConferenceRoom",
+            "location": "TCS Chennai",
+            "capacity": 15,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC",
+                "Mike",
+                "Projector"
+            ],
+            "status": "Active"
+        },
+        {
+            "name": "TR3",
+            "location": "TCS Kochi",
+            "capacity": 12,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC",
+                "Projector"
+            ],
+            "status": "Under Maintenance"
+        },
+        {
+            "name": "Cubicle1",
+            "location": "TCS Mumbai",
+            "capacity": 2,
+            "specifications": [
+                "Light",
+                "Chair"
+            ],
+            "status": "Active"
+        },
+        {
+            "name": "Cubicle2",
+            "location": "TCS TVM",
+            "capacity": 2,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC"
+            ],
+            "status": "Active"
+        },
+        {
+            "name": "ODC",
+            "location": "TCS Chennai",
+            "capacity": 25,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC",
+                "Projector"
+            ],
+            "status": "Under Maintenance"
+        },
+        {
+            "name": "ConferenceRoom",
+            "location": "TCS Kochi",
+            "capacity": 18,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC",
+                "Mike",
+                "Projector"
+            ],
+            "status": "Active"
+        },
+        {
+            "name": "TR1",
+            "location": "TCS TVM",
+            "capacity": 10,
+            "specifications": [
+                "Light",
+                "Chair",
+                "AC",
+                "Mike"
+            ],
+            "status": "Under Maintenance"
+        }
+    ]
+}

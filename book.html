@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MeetNspace Dashboard</title>
+  <link rel="stylesheet" href="book.css">
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">meetNspace</div>
+      <button class="toggle-btn" id="toggleSidebar">
+        ≡
+      </button>
+    </div>
+    
+    <ul class="menu-list">
+      <a href="#">
+      <li class="menu-item " data-tooltip="Dashboard">
+        <span class="menu-icon">📊</span>
+        <span class="menu-text">Dashboard</span>
+      </li>
+      </a>
+      <a href="history.html">
+      <li class="menu-item" data-tooltip="View Bookings">
+        <span class="menu-icon">🔍</span>
+        <span class="menu-text">Booking History</span>
+      </li>
+      </a>
+      <a href="book.html">
+      <li class="menu-item active" data-tooltip="Add Room Details">
+        <span class="menu-icon">➕</span>
+        <span class="menu-text">Create Booking</span>
+      </li>
+    </a>
+      <a href="#">
+      <li class="menu-item" data-tooltip="Feedbacks">
+        <span class="menu-icon">📝</span>
+        <span class="menu-text">Feedbacks</span>
+      </li>
+    </a>
+      <div class="divider"></div>
+      <a href="#">
+      <li class="menu-item" data-tooltip="Profile">
+        <span class="menu-icon">👤</span>
+        <span class="menu-text">Profile</span>
+      </li>
+      </a>
+      
+      <div class="divider"></div>
+      <a href="#">
+      <li class="menu-item" data-tooltip="Logout">
+        <span class="menu-icon">↩️</span>
+        <span class="menu-text">Logout</span>
+      </li>
+      </a>
+    </ul>
+  </div>
+  
+  <button class="mobile-toggle" id="mobileToggle">☰</button>
+  
+  <div class="content" id="content">
+    <div class="content-header">
+        <div>
+            <label for="location">location</label>
+        <select name="location" id="location">
+            <option value="all-loc" class="loc">All Locations</option>
+            <option value="tcs-kochi" class="loc">TCS KOCHI</option>
+            <option value="tcs-tvm" class="loc">TCS TVM</option>
+            <option value="tcs-mumbai" class="loc">TCS Mumbai</option>
+            <option value="tcs-chennai" class="loc">TCS Chennai</option>
+        </select>
+        </div>
+        <!-- <label for="status">status</label>
+        <select name="status" id="status">
+            <option value="active">active</option>
+            <option value="under maintanance">under maintanace</option>
+        </select> -->
+        <label class="switch">
+            <p>All rooms</p>
+            <input type="checkbox"  id="status-filter">
+            <span class="slider"></span>
+             <p>Active Rooms</p>
+        </label>
+        <input type="date" id="date">
+        <div>
+            <input type="time" id="from-time">
+            <select name="duration" id="duration">
+                <option value="1">1hr</option>
+                <option value="1">2hr</option>
+                <option value="1">3hr</option>
+            </select>
+        </div>
+    </div>
+    <div class="content-body">
+         <div id="roomList"></div>
+    </div>
+    
+    <!-- for booking each room -->
+    <div id="bookingModal" class="booking-modal">
+        <h3>Book Room</h3>
+        <input type="hidden" id="bookIndex">
+        
+        <label>Room Name:</label>
+        <input type="text" id="bookRoomName" readonly>
+
+        <label>Location:</label>
+        <input type="text" id="bookLocation" readonly>
+
+        <label>Capacity:</label>
+        <input type="text" id="bookCapacity" readonly>
+
+        <label>Select Date:</label>
+        <input type="date" id="bookDate">
+
+        <label>From Time:</label>
+        <select id="bookFromTime">
+            <option value="9:00 AM">9:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="1:00 PM">1:00 PM</option>
+            <option value="3:00 PM">3:00 PM</option>
+        </select>
+
+        <label>Duration:</label>
+        <select id="bookDuration">
+            <option value="1">1 hour</option>
+            <option value="2">2 hours</option>
+            <option value="3">3 hours</option>
+        </select>
+
+        <button id="saveBooking">Confirm Booking</button>
+        <button id="closeBooking">Cancel</button>
+    </div>
+
+  </div>
+  
+  <script>
+    // Get elements
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    // Toggle sidebar
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      content.classList.toggle('expanded');
+    });
+    
+    // Mobile toggle
+    mobileToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('mobile-open');
+    });
+    
+    // Add click event to menu items
+    menuItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // Remove active class from all menu items
+        menuItems.forEach(item => item.classList.remove('active'));
+        
+        // Add active class to clicked item
+        this.classList.add('active');
+        
+        // Close sidebar on mobile after clicking
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('mobile-open');
+        }
+      });
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('collapsed');
+        content.classList.remove('expanded');
+      }
+    });
+  </script>
+  <script src="book.js"></script>
+</body>
+</html>

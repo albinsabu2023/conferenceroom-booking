@@ -1,0 +1,195 @@
+<html>
+<head>
+  <title>MeetNspace Dashboard</title>
+ <link rel="stylesheet" href="history.css">
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">meetNspace</div>
+      <button class="toggle-btn" id="toggleSidebar">
+        ≡
+      </button>
+    </div>
+    
+    <ul class="menu-list">
+      <a href="#">
+      <li class="menu-item " data-tooltip="Dashboard">
+        <span class="menu-icon">📊</span>
+        <span class="menu-text">Dashboard</span>
+      </li>
+      </a>
+      <a href="history.html">
+      <li class="menu-item active" data-tooltip="View Bookings">
+        <span class="menu-icon">🔍</span>
+        <span class="menu-text">Booking History</span>
+      </li>
+      </a>
+      <a href="book.html">
+      <li class="menu-item" data-tooltip="Add Room Details">
+        <span class="menu-icon">➕</span>
+        <span class="menu-text">Create Booking</span>
+      </li>
+    </a>
+      <a href="#">
+      <li class="menu-item" data-tooltip="Feedbacks">
+        <span class="menu-icon">📝</span>
+        <span class="menu-text">Feedbacks</span>
+      </li>
+    </a>
+      <div class="divider"></div>
+      <a href="#">
+      <li class="menu-item" data-tooltip="Profile">
+        <span class="menu-icon">👤</span>
+        <span class="menu-text">Profile</span>
+      </li>
+      </a>
+      
+      <div class="divider"></div>
+      <a href="#">
+      <li class="menu-item" data-tooltip="Logout">
+        <span class="menu-icon">↩️</span>
+        <span class="menu-text">Logout</span>
+      </li>
+      </a>
+    </ul>
+  </div>
+  
+  <button class="mobile-toggle" id="mobileToggle">☰</button>
+  
+  <div class="content" id="content">
+    
+    <h1>Room Booking Management</h1>
+
+    <!-- Navbar -->
+   <div class="navbar">
+        <button class="tab-btn active" data-tab="allBookings">All Bookings</button>
+        <button class="tab-btn" data-tab="activeBookings">Active Bookings</button>
+        <button class="tab-btn" data-tab="cancelledBookings">Cancelled Bookings</button>
+    </div>
+
+    <div id="allBookings" class="tab-content active">
+        <h2>All Bookings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Location</th>
+                    <th>Capacity</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Snacks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="activeBookings" class="tab-content">
+        <h2>Active Bookings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Location</th>
+                    <th>Capacity</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Snacks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="cancelledBookings" class="tab-content">
+        <h2>Cancelled Bookings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Location</th>
+                    <th>Capacity</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Snacks</th>
+                  
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close">&times;</span>
+            <h2>Edit Booking</h2>
+            <label>Room Name:</label>
+            <input type="text" id="editRoomName">
+            <label>Location:</label>
+            <input type="text" id="editLocation">
+            <label>Capacity:</label>
+            <input type="number" id="editCapacity">
+            <label>Date:</label>
+            <input type="date" id="editDate">
+            <label>From Time:</label>
+            <input type="time" id="editFromTime">
+            <label>To Time:</label>
+            <input type="time" id="editToTime">
+            <label><input type="checkbox" id="editSnacks"> Snacks Needed</label>
+            <button id="saveEdit">Save Changes</button>
+        </div>
+    </div>
+
+
+
+  <script>
+    // Get elements
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    // Toggle sidebar
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      content.classList.toggle('expanded');
+    });
+    
+    // Mobile toggle
+    mobileToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('mobile-open');
+    });
+    
+    // Add click event to menu items
+    menuItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // Remove active class from all menu items
+        menuItems.forEach(item => item.classList.remove('active'));
+        
+        // Add active class to clicked item
+        this.classList.add('active');
+        
+        // Close sidebar on mobile after clicking
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('mobile-open');
+        }
+      });
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('collapsed');
+        content.classList.remove('expanded');
+      }
+    });
+  </script>
+  <script src="history.js"></script>
+</body>
+</html>
