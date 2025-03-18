@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     setTimeout(() => {
       window.location.href = "preview.html";
-    }, 1000);
+    }, 2500);
   });
 
   function calculateEndTime(fromTime, duration) {
