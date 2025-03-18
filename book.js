@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const bookDurationSelect = document.getElementById("bookDuration");
   const bookFromTimeSelect = document.getElementById("bookFromTime");
   const bookEndTimeInput = document.getElementById("bookEndTime");
-  const bookDateInput = document.getElementById("bookDate");
+  // const bookDateInput = document.getElementById("bookDate");
   const snacksCheckbox = document.getElementById("snacksRequired");
   const bookingIdDisplay = document.getElementById("bookingIdDisplay");
   const popup = document.getElementById("popup");
@@ -226,11 +226,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Reset snacks checkbox
     snacksCheckbox.checked = false;
-
-    // Set today's date as minimum
-    const today = new Date().toISOString().split("T")[0];
-    bookDateInput.min = today;
-    bookDateInput.value = today;
 
     // Set initial end time
     updateEndTime();

@@ -153,6 +153,10 @@
   
   <script>
     // Get elements
+     document.addEventListener("DOMContentLoaded", function () {
+            let today = new Date().toISOString().split("T")[0];
+            document.getElementById("bookDate").setAttribute("min", today);
+          });
     const sidebar = document.getElementById('sidebar');
     const content = document.getElementById('content');
     const toggleBtn = document.getElementById('toggleSidebar');
