@@ -298,25 +298,50 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
-    padding: 20px;
+    padding:0px 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .modal-content{
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    width: 300px;
+   padding-bottom: 10px;
+    width: 400px;
     
+    font-weight: bold;
+    justify-content: center;
 }
+
+
+.modal-content input,.modal-content select{
+  padding: 10px 10px;
+  border: 1px solid rgb(27, 130, 159);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
 .modal.hidden {
     display: none;
 }
 
+.modal-content button{
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  display: flex;
+  margin-left: 70px;
+  justify-content: center;
+ 
+}
 .close {
     float: right;
     cursor: pointer;
     font-size: 20px;
+    color: red;
+    display: flex;
+    justify-content: end;
 }
 /* Styles for Edit button */
 button.edit-btn {
@@ -333,7 +358,7 @@ button.edit-btn:hover {
 
 /* Styles for Cancel button */
 button.cancel-btn {
-    background-color: #dc3545;
+    background-color: #a23232;
     color: white;
     border: none;
     border-radius: 4px;
@@ -345,7 +370,7 @@ button.cancel-btn:hover {
 }
 
 /* Styles for Add Snacks button */
-button.snacks-btn {
+button.add-snacks-btn {
     background-color: #ffc107;
     color: black;
     border: none;
@@ -353,6 +378,137 @@ button.snacks-btn {
     transition: background-color 0.3s ease;
 }
 
-button.snacks-btn:hover {
+button.add-snacks-btn:hover {
     background-color: #e0a800;
+}
+/* Search Bar Styles */
+.search-container {
+    margin-bottom: 20px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-container input {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    max-width: 300px;
+}
+
+.search-container button {
+    padding:4px 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #45a049;
+}
+
+#clearSearchBtn {
+    background-color: #f44336;
+}
+h2{
+  text-align: center;
+}
+h4{
+  color: #6c2bd9;
+  text-align: center;
+  padding: 10px;
+}
+#clearSearchBtn:hover {
+    background-color: #d32f2f;
+}
+/* Custom Popup Styles */
+.custom-popup {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: popupFadeIn 0.3s;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popup-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 20px;
+}
+
+.popup-close:hover,
+.popup-close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.popup-buttons {
+  margin-top: 20px;
+}
+
+.popup-btn {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.confirm-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+#popupMessage {
+  margin: 15px 0;
+  font-size: 16px;
+}
+.add-snacks-btn{
+  background-color: yellow;
+}
+
+.history-header{
+  display: flex;
+  justify-content: space-between;
 }

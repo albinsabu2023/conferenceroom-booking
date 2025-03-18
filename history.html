@@ -59,20 +59,27 @@
   
   <div class="content" id="content">
     
-    <h1>Room Booking Management</h1>
+    <h2>Your Booking History</h2>
 
     <!-- Navbar -->
-   <div class="navbar">
-        <button class="tab-btn active" data-tab="allBookings">All Bookings</button>
-        <button class="tab-btn" data-tab="activeBookings">Active Bookings</button>
-        <button class="tab-btn" data-tab="cancelledBookings">Cancelled Bookings</button>
+  <div class="history-header">
+      <div class="navbar">
+          <button class="tab-btn active" data-tab="allBookings">All Bookings</button>
+          <button class="tab-btn" data-tab="activeBookings">Active Bookings</button>
+          <button class="tab-btn" data-tab="cancelledBookings">Cancelled Bookings</button>
+      </div>
+      <div class="search-container">
+      <input type="text" id="searchBooking" placeholder="Enter Booking ID...">
+      <button id="searchBtn">Search</button>
+      <button id="clearSearchBtn" style="display: none;">Clear</button>
     </div>
-
+  </div>
     <div id="allBookings" class="tab-content active">
-        <h2>All Bookings</h2>
+        <h4>All Bookings</h4>
         <table>
             <thead>
                 <tr>
+                  <th>Booking Id</th>
                     <th>Room</th>
                     <th>Location</th>
                     <th>Capacity</th>
@@ -87,10 +94,11 @@
     </div>
 
     <div id="activeBookings" class="tab-content">
-        <h2>Active Bookings</h2>
+        <h4>Active Bookings</h4>
         <table>
             <thead>
                 <tr>
+                   <th>Booking Id</th>
                     <th>Room</th>
                     <th>Location</th>
                     <th>Capacity</th>
@@ -105,10 +113,11 @@
     </div>
 
     <div id="cancelledBookings" class="tab-content">
-        <h2>Cancelled Bookings</h2>
+        <h4>Cancelled Bookings</h4>
         <table>
             <thead>
                 <tr>
+                   <th>Booking Id</th>
                     <th>Room</th>
                     <th>Location</th>
                     <th>Capacity</th>
@@ -145,7 +154,16 @@
         </div>
     </div>
 
-
+    <div id="customPopup" class="custom-popup">
+  <div class="popup-content">
+    <span class="popup-close" id="closePopup">&times;</span>
+    <p id="popupMessage"></p>
+    <div class="popup-buttons">
+      <button id="popupConfirm" class="popup-btn confirm-btn">OK</button>
+      <button id="popupCancel" class="popup-btn cancel-btn">Cancel</button>
+    </div>
+  </div>
+</div>
 
   <script>
     // Get elements
