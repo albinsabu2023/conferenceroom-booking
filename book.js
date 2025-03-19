@@ -116,24 +116,34 @@ document.addEventListener("DOMContentLoaded", function () {
   function loadRooms(selectedLocation = "all-loc") {
     const storedRooms = localStorage.getItem("rooms");
     if (storedRooms) {
-      var rooms = JSON.parse(storedRooms);
+      // Keep the original rooms array intact - we'll use this for reference
+      const allRooms = JSON.parse(storedRooms);
       roomListDiv.innerHTML = ""; // Clear previous data
 
-      // Check if checkbox is checked
-      var showActiveOnly = statusFilterCheckbox.checked;
-      if (showActiveOnly) {
-        rooms = rooms.filter((room) => room.status.toLowerCase() === "active");
-      }
-      // Filter rooms based on selected location
-      const filteredRooms = rooms.filter((room) => {
-        if (selectedLocation === "all-loc") return true;
-        return (
-          room.location.toLowerCase().replace(/\s/g, "-") === selectedLocation
-        );
-      });
+      // Apply filters
+      let filteredRooms = [...allRooms]; // Create a copy to work with
 
-      // Display rooms
-      filteredRooms.forEach((room, index) => {
+      // Filter by active status if checkbox is checked
+      const showActiveOnly = statusFilterCheckbox.checked;
+      if (showActiveOnly) {
+        filteredRooms = filteredRooms.filter(
+          (room) => room.status.toLowerCase() === "active"
+        );
+      }
+
+      // Filter by location
+      if (selectedLocation !== "all-loc") {
+        filteredRooms = filteredRooms.filter(
+          (room) =>
+            room.location.toLowerCase().replace(/\s/g, "-") === selectedLocation
+        );
+      }
+
+      // Display filtered rooms
+      filteredRooms.forEach((room) => {
+        // Create a unique identifier for this room
+        const roomIdentifier = `${room.name}-${room.location}-${room.capacity}`;
+
         const roomDiv = document.createElement("div");
         roomDiv.classList.add("room");
         roomDiv.classList.add(
@@ -141,50 +151,40 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
         roomDiv.innerHTML = `
-          <div class="room-header">
-            <div class="room-header-first">
-             <h3>${room.name}</h3>
-            <p >[ ${room.status} ]</p></div>
-            <p><img src="https://cdn-icons-png.flaticon.com/128/2838/2838912.png" heght="20" width="20"> ${
-              room.location
-            }</p>
-          </div>
-         
-          
-          <div class="room-card-body">
-          
-          <p ><strong>Specifications:</strong> ${room.specifications.join(
-            ", "
-          )}</p></div>
-         
-          <div class="room-footer">
-            
-            <p ><img src="https://cdn-icons-png.flaticon.com/128/6151/6151135.png"  heght="20" width="20" > ${
-              room.capacity
-            }</p>
-            ${
-              room.status === "Active"
-                ? `<button class="book-btn" data-index="${index}">Book Now</button>`
-                : ""
-            }
-          </div>
-        `;
+        <div class="room-header">
+          <div class="room-header-first">
+           <h3>${room.name}</h3>
+          <p >[ ${room.status} ]</p></div>
+          <p><img src="https://cdn-icons-png.flaticon.com/128/2838/2838912.png" heght="20" width="20"> ${
+            room.location
+          }</p>
+        </div>
+        
+        <div class="room-card-body">
+        <p ><strong>Specifications:</strong> ${room.specifications.join(
+          ", "
+        )}</p></div>
+       
+        <div class="room-footer">
+          <p ><img src="https://cdn-icons-png.flaticon.com/128/6151/6151135.png" heght="20" width="20" > ${
+            room.capacity
+          }</p>
+          ${
+            room.status === "Active"
+              ? `<button class="book-btn" data-identifier="${roomIdentifier}">Book Now</button>`
+              : ""
+          }
+        </div>
+      `;
 
         roomListDiv.appendChild(roomDiv);
       });
 
-      // Add event listeners for edit & book buttons
-      document.querySelectorAll(".edit-btn").forEach((button) => {
-        button.addEventListener("click", function () {
-          const index = this.getAttribute("data-index");
-          openEditForm(index);
-        });
-      });
-
+      // Add event listeners for book buttons
       document.querySelectorAll(".book-btn").forEach((button) => {
         button.addEventListener("click", function () {
-          const index = this.getAttribute("data-index");
-          openBookingForm(index);
+          const identifier = this.getAttribute("data-identifier");
+          openBookingForm(identifier);
         });
       });
     }
@@ -210,9 +210,25 @@ document.addEventListener("DOMContentLoaded", function () {
   bookDurationSelect.addEventListener("change", updateEndTime);
   bookFromTimeSelect.addEventListener("change", updateEndTime);
 
-  function openBookingForm(index) {
+  // Modified to use identifier instead of index
+  function openBookingForm(identifier) {
     const rooms = JSON.parse(localStorage.getItem("rooms"));
-    const room = rooms[index];
+
+    // Parse the identifier to get room properties
+    const [name, location, capacity] = identifier.split("-");
+
+    // Find the exact room in the original array
+    const room = rooms.find(
+      (r) =>
+        r.name === name &&
+        r.location === location &&
+        r.capacity.toString() === capacity
+    );
+
+    if (!room) {
+      console.error("Room not found!");
+      return;
+    }
 
     // Generate new booking ID
     currentBookingId = generateBookingId();
@@ -222,7 +238,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("bookLocation").value = room.location;
     document.getElementById("bookMaxCapacity").value = room.capacity;
     document.getElementById("bookCapacity").value = ""; // Clear for user input
-    document.getElementById("bookIndex").value = index;
+
+    // Instead of storing index, store the room identifier
+    document.getElementById("bookIndex").value = identifier;
 
     // Reset snacks checkbox
     snacksCheckbox.checked = false;
@@ -233,13 +251,29 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("bookingModal").style.display = "block";
   }
 
+  // Modified to use identifier instead of index
   document.getElementById("saveBooking").addEventListener("click", function () {
-    const index = document.getElementById("bookIndex").value;
+    const identifier = document.getElementById("bookIndex").value;
     const rooms = JSON.parse(localStorage.getItem("rooms"));
-    const room = rooms[index];
+
+    // Parse the identifier to get room properties
+    const [name, location, capacity] = identifier.split("-");
+
+    // Find the exact room in the original array
+    const room = rooms.find(
+      (r) =>
+        r.name === name &&
+        r.location === location &&
+        r.capacity.toString() === capacity
+    );
+
+    if (!room) {
+      showPopup("Error: Room not found!", true);
+      return;
+    }
 
     const roomName = document.getElementById("bookRoomName").value;
-    const location = document.getElementById("bookLocation").value;
+    const roomLocation = document.getElementById("bookLocation").value;
     const maxCapacity = parseInt(
       document.getElementById("bookMaxCapacity").value
     );
@@ -278,7 +312,7 @@ document.addEventListener("DOMContentLoaded", function () {
       (b) =>
         b.date === date &&
         b.roomName === roomName &&
-        b.location === location &&
+        b.location === roomLocation &&
         b.fromTime === fromTime
     );
 
@@ -291,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
     bookings.push({
       bookingId: currentBookingId,
       roomName,
-      location,
+      location: roomLocation,
       date,
       fromTime,
       toTime,
